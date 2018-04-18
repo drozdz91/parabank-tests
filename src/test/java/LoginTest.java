@@ -5,6 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
 public class LoginTest {
     public WebDriver driver = new ChromeDriver();
@@ -23,5 +25,16 @@ public class LoginTest {
 
     public void logout(String logOut) {
         driver.findElement(By.xpath(logOut)).sendKeys(Keys.ENTER);
+    }
+
+    @Test
+    public void shouldLoginWithCorrectData() {
+        driver.get(baseUrl);
+        waitForPageLoad(driver);
+        login("Mat", "test", "//input[@class='button' and @value='Log In']");
+        waitForPageLoad(driver);
+
+        Assert.assertTrue(driver.findElement(By.xpath("//a[@href='/parabank/logout.htm']")).isDisplayed());
+        logout("//a[@href='/parabank/logout.htm']");
     }
 }
