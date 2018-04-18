@@ -61,4 +61,35 @@ public class RegistrationTest {
         Assert.assertEquals(actualTitle, expectedTitle);
         System.out.println("Test case 2 - shouldNotRegisterWithTheSameUsername: PASSED.");
     }
+
+    @Test(priority = 2)
+    public void shouldNotRegisterWithoutUsername() {
+        driver.get(baseUrl);
+        waitForPageLoad(driver);
+        register("Mat", "Dro", "Teczowa", "Koszalin", "zachodniopomorskie",
+                "11-111", "12345", "", "test", "test",
+                "//input[@class='button' and @value='Register']");
+        waitForPageLoad(driver);
+
+        String expectedTitle = "Username is required.";
+        String actualTitle = driver.findElement(By.xpath("//span[@id='customer.username.errors']")).getText();
+        Assert.assertEquals(actualTitle, expectedTitle);
+        System.out.println("Test case 3 - shouldNotRegisterWithoutUsername: PASSED.");
+    }
+
+    @Test(priority = 3)
+    public void shouldNotRegisterWithIncorrectConfirmPassword() {
+        driver.get(baseUrl);
+        waitForPageLoad(driver);
+        register("Mat", "Dro", "Teczowa", "Koszalin", "zachodniopomorskie",
+                "11-111", "12345", "Mat", "test", "te",
+                "//input[@class='button' and @value='Register']");
+        waitForPageLoad(driver);
+
+        String expectedTitle = "Passwords did not match.";
+        String actualTitle = driver.findElement(By.xpath("//span[@id='repeatedPassword.errors']")).getText();
+        Assert.assertEquals(actualTitle, expectedTitle);
+        System.out.println("Test case 4 - shouldNotRegisterWithIncorrectConfirmPassword: PASSED.");
+        driver.close();
+    }
 }
