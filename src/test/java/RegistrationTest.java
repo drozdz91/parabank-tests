@@ -4,6 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
 public class RegistrationTest {
     public WebDriver driver = new ChromeDriver();
@@ -28,5 +30,20 @@ public class RegistrationTest {
         driver.findElement(By.xpath("//input[@id='customer.password']")).sendKeys(password);
         driver.findElement(By.xpath("//input[@id='repeatedPassword']")).sendKeys(confirmPassword);
         driver.findElement(By.xpath(registerButton)).click();
+    }
+
+    @Test
+    public void shouldRegisterWithCorrectData() {
+        driver.get(baseUrl);
+        waitForPageLoad(driver);
+        register("Mat", "Dro", "Teczowa", "Koszalin", "zachodniopomorskie",
+                "11-111", "12345", "Mat", "test", "test",
+                "//input[@class='button' and @value='Register']");
+        waitForPageLoad(driver);
+
+        String expectedTitle = "Your account was created successfully. You are now logged in.";
+        String actualTitle = driver.findElement(By.xpath("//div[@id='rightPanel']/p")).getText();
+        Assert.assertEquals(actualTitle, expectedTitle);
+        System.out.println("Test case 1 - shouldRegisterWithCorrectData: PASSED.");
     }
 }
