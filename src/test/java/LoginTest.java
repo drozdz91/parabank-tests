@@ -37,4 +37,16 @@ public class LoginTest {
         Assert.assertTrue(driver.findElement(By.xpath("//a[@href='/parabank/logout.htm']")).isDisplayed());
         logout("//a[@href='/parabank/logout.htm']");
     }
+
+    @Test (priority = 1)
+    public void shouldNotLoginWithoutUsername() {
+        driver.get(baseUrl);
+        waitForPageLoad(driver);
+        login("", "test", "//input[@class='button' and @value='Log In']");
+        waitForPageLoad(driver);
+
+        String expectedTitle = "Please enter a username and password.";
+        String actualTitle = driver.findElement(By.xpath("//p[@class='error']")).getText();
+        Assert.assertEquals(actualTitle, expectedTitle);
+    }
 }
