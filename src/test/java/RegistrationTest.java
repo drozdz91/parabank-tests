@@ -46,4 +46,19 @@ public class RegistrationTest {
         Assert.assertEquals(actualTitle, expectedTitle);
         System.out.println("Test case 1 - shouldRegisterWithCorrectData: PASSED.");
     }
+
+    @Test(priority = 1)
+    public void shouldNotRegisterWithTheSameUsername() {
+        driver.get(baseUrl);
+        waitForPageLoad(driver);
+        register("Mat", "Dro", "Teczowa", "Koszalin", "zachodniopomorskie",
+                "11-111", "12345", "Mat", "test", "test",
+                "//input[@class='button' and @value='Register']");
+        waitForPageLoad(driver);
+
+        String expectedTitle = "This username already exists.";
+        String actualTitle = driver.findElement(By.xpath("//span[@id='customer.username.errors']")).getText();
+        Assert.assertEquals(actualTitle, expectedTitle);
+        System.out.println("Test case 2 - shouldNotRegisterWithTheSameUsername: PASSED.");
+    }
 }
