@@ -49,4 +49,17 @@ public class LoginTest {
         String actualTitle = driver.findElement(By.xpath("//p[@class='error']")).getText();
         Assert.assertEquals(actualTitle, expectedTitle);
     }
+
+    @Test (priority = 2)
+    public void shouldNotLoginWithoutPassword() {
+        driver.get(baseUrl);
+        waitForPageLoad(driver);
+        login("Mat", "", "//input[@class='button' and @value='Log In']");
+        waitForPageLoad(driver);
+
+        String expectedTitle = "Please enter a username and password.";
+        String actualTitle = driver.findElement(By.xpath("//p[@class='error']")).getText();
+        Assert.assertEquals(actualTitle, expectedTitle);
+        driver.close();
+    }
 }
