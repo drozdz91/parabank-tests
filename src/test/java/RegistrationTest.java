@@ -90,6 +90,6 @@ public class RegistrationTest {
         String actualTitle = driver.findElement(By.xpath("//span[@id='repeatedPassword.errors']")).getText();
         Assert.assertEquals(actualTitle, expectedTitle);
         System.out.println("Test case 4 - shouldNotRegisterWithIncorrectConfirmPassword: PASSED.");
-        driver.close();
+        driver.quit();
     }
 }
