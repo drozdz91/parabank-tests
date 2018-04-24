@@ -60,6 +60,6 @@ public class LoginTest {
         String expectedTitle = "Please enter a username and password.";
         String actualTitle = driver.findElement(By.xpath("//p[@class='error']")).getText();
         Assert.assertEquals(actualTitle, expectedTitle);
-        driver.close();
+        driver.quit();
     }
 }
