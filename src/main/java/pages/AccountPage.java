@@ -13,7 +13,7 @@ public class AccountPage extends MainPage {
         return driver.findElement(By.xpath("//a[@href='/parabank/logout.htm']")).isDisplayed();
     }
 
-    public boolean isUserRegistered() {
-        return driver.findElement(By.xpath("//a[@href='/parabank/logout.htm']")).isDisplayed();
+    public String getRegisterConfirmationText() {
+        return driver.findElement(By.xpath("//div[@id='rightPanel']/p")).getText();
     }
 }
