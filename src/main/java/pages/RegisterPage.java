@@ -57,4 +57,16 @@ public class RegisterPage extends MainPage {
     public void clickRegisterButton() {
         driver.findElement(By.xpath("//input[@class='button' and @value='Register']")).click();
     }
+
+    public String getErrorTheSameUserNameText() {
+        return driver.findElement(By.xpath("//span[@id='customer.username.errors']")).getText();
+    }
+
+    public String getErrorWithoutUserNameText() {
+        return driver.findElement(By.xpath("//span[@id='customer.username.errors']")).getText();
+    }
+
+    public String getErrorWrongConfirmationPassword() {
+        return driver.findElement(By.xpath("//span[@id='repeatedPassword.errors']")).getText();
+    }
 }

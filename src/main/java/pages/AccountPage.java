@@ -12,4 +12,8 @@ public class AccountPage extends MainPage {
     public boolean isUserLoggedIn() {
         return driver.findElement(By.xpath("//a[@href='/parabank/logout.htm']")).isDisplayed();
     }
+
+    public boolean isUserRegistered() {
+        return driver.findElement(By.xpath("//a[@href='/parabank/logout.htm']")).isDisplayed();
+    }
 }
