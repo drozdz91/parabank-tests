@@ -4,11 +4,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 
-public class IndexPage {
-    private WebDriver driver;
+public class IndexPage extends MainPage {
 
     public IndexPage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 
     public void openIndexPage() {
