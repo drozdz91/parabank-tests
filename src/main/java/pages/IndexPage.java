@@ -1,7 +1,6 @@
 package pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 
 public class IndexPage extends MainPage {
@@ -12,10 +11,11 @@ public class IndexPage extends MainPage {
 
     public void openIndexPage() {
         driver.get("http://parabank.parasoft.com/");
+        waitForJStoLoad();
     }
 
-    public void fillUsername(String username) {
-        driver.findElement(By.xpath("//input[@name='username']")).sendKeys(username);
+    public void fillUsername(String userName) {
+        driver.findElement(By.xpath("//input[@name='username']")).sendKeys(userName);
     }
 
     public void fillPassword(String password) {
@@ -23,7 +23,7 @@ public class IndexPage extends MainPage {
     }
 
     public void clickLoginButton() {
-        driver.findElement(By.xpath("//input[@class='button' and @value='Log In']")).sendKeys(Keys.ENTER);
+        driver.findElement(By.xpath("//input[@class='button' and @value='Log In']")).click();
     }
 
     public String getErrorText() {
