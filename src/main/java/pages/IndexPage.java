@@ -1,0 +1,29 @@
+package pages;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+
+public class IndexPage {
+    private WebDriver driver;
+
+    public IndexPage(WebDriver driver) {
+        this.driver = driver;
+    }
+
+    public void openParabank() {
+        driver.get("http://parabank.parasoft.com/");
+    }
+
+    public void fillUsername(String username) {
+        driver.findElement(By.xpath("//input[@name='username']")).sendKeys(username);
+    }
+
+    public void fillPassword(String password) {
+        driver.findElement(By.xpath("//input[@name='password']")).sendKeys(password);
+    }
+
+    public void clickLogIn() {
+        driver.findElement(By.xpath("//input[@class='button' and @value='Log In']")).sendKeys(Keys.ENTER);
+    }
+}
