@@ -11,7 +11,7 @@ public class IndexPage {
         this.driver = driver;
     }
 
-    public void openParabank() {
+    public void openIndexPage() {
         driver.get("http://parabank.parasoft.com/");
     }
 
@@ -23,7 +23,11 @@ public class IndexPage {
         driver.findElement(By.xpath("//input[@name='password']")).sendKeys(password);
     }
 
-    public void clickLogIn() {
+    public void clickLoginButton() {
         driver.findElement(By.xpath("//input[@class='button' and @value='Log In']")).sendKeys(Keys.ENTER);
+    }
+
+    public String getErrorText() {
+        return driver.findElement(By.xpath("//p[@class='error']")).getText();
     }
 }
