@@ -42,8 +42,8 @@ public class RegisterPage extends MainPage {
         driver.findElement(By.xpath("//input[@id='customer.ssn']")).sendKeys(ssn);
     }
 
-    public void fillUserName(String userName) {
-        driver.findElement(By.xpath("//input[@id='customer.username']")).sendKeys(userName);
+    public void fillUsername(String username) {
+        driver.findElement(By.xpath("//input[@id='customer.username']")).sendKeys(username);
     }
 
     public void fillPassword(String password) {
@@ -56,13 +56,14 @@ public class RegisterPage extends MainPage {
 
     public void clickRegisterButton() {
         driver.findElement(By.xpath("//input[@class='button' and @value='Register']")).click();
+        waitForJStoLoad();
     }
 
-    public String getErrorTheSameUserNameText() {
+    public String getErrorTheSameUsernameText() {
         return driver.findElement(By.xpath("//span[@id='customer.username.errors']")).getText();
     }
 
-    public String getErrorWithoutUserNameText() {
+    public String getErrorWithoutUsernameText() {
         return driver.findElement(By.xpath("//span[@id='customer.username.errors']")).getText();
     }
 

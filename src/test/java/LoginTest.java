@@ -23,7 +23,7 @@ public class LoginTest {
     @Test
     public void shouldLogin() {
         indexPage.openIndexPage();
-        indexPage.fillUsername("Mat");
+        indexPage.fillUsername("Mat7");
         indexPage.fillPassword("test");
         indexPage.clickLoginButton();
         Assert.assertTrue(accountPage.isUserLoggedIn());
@@ -41,7 +41,7 @@ public class LoginTest {
     @Test
     public void shouldNotLoginWithoutPassword() {
         indexPage.openIndexPage();
-        indexPage.fillUsername("Mat");
+        indexPage.fillUsername("Mat7");
         indexPage.fillPassword("");
         indexPage.clickLoginButton();
         Assert.assertEquals(indexPage.getErrorText(), "Please enter a username and password.");

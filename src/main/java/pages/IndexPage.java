@@ -24,6 +24,7 @@ public class IndexPage extends MainPage {
 
     public void clickLoginButton() {
         driver.findElement(By.xpath("//input[@class='button' and @value='Log In']")).click();
+        waitForJStoLoad();
     }
 
     public String getErrorText() {
