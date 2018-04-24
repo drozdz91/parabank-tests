@@ -66,7 +66,7 @@ public class RegisterPage extends MainPage {
         return driver.findElement(By.xpath("//span[@id='customer.username.errors']")).getText();
     }
 
-    public String getErrorWrongConfirmationPassword() {
+    public String getErrorWrongConfirmationPasswordText() {
         return driver.findElement(By.xpath("//span[@id='repeatedPassword.errors']")).getText();
     }
 }
