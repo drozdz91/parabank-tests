@@ -23,14 +23,14 @@ public class RegistrationTest {
     @Test
     public void shouldRegister() {
         registerPage.openRegisterPage();
-        registerPage.fillFirstName("Mat7");
+        registerPage.fillFirstName("Mat");
         registerPage.fillLastName("Dro");
         registerPage.fillAddress("Teczowa");
         registerPage.fillCity("Koszalin");
         registerPage.fillState("zachodniopomorskie");
         registerPage.fillZipCode("11-111");
         registerPage.fillSSN("12345");
-        registerPage.fillUsername("Mat7");
+        registerPage.fillUsername("Mat");
         registerPage.fillPassword("test");
         registerPage.fillConfirmationPassword("test");
         registerPage.clickRegisterButton();
@@ -41,14 +41,14 @@ public class RegistrationTest {
     @Test(priority = 1)
     public void shouldNotRegisterWithTheSameUsername() {
         registerPage.openRegisterPage();
-        registerPage.fillFirstName("Mat7");
+        registerPage.fillFirstName("Mat");
         registerPage.fillLastName("Dro");
         registerPage.fillAddress("Teczowa");
         registerPage.fillCity("Koszalin");
         registerPage.fillState("zachodniopomorskie");
         registerPage.fillZipCode("11-111");
         registerPage.fillSSN("12345");
-        registerPage.fillUsername("Mat7");
+        registerPage.fillUsername("Mat");
         registerPage.fillPassword("test");
         registerPage.fillConfirmationPassword("test");
         registerPage.clickRegisterButton();
@@ -59,7 +59,7 @@ public class RegistrationTest {
     @Test(priority = 2)
     public void shouldNotRegisterWithoutUsername() {
         registerPage.openRegisterPage();
-        registerPage.fillFirstName("Mat7");
+        registerPage.fillFirstName("Mat");
         registerPage.fillLastName("Dro");
         registerPage.fillAddress("Teczowa");
         registerPage.fillCity("Koszalin");
@@ -77,14 +77,14 @@ public class RegistrationTest {
     @Test(priority = 3)
     public void shouldNotRegisterWithWrongConfirmPassword() {
         registerPage.openRegisterPage();
-        registerPage.fillFirstName("Mat7");
+        registerPage.fillFirstName("Mat");
         registerPage.fillLastName("Dro");
         registerPage.fillAddress("Teczowa");
         registerPage.fillCity("Koszalin");
         registerPage.fillState("zachodniopomorskie");
         registerPage.fillZipCode("11-111");
         registerPage.fillSSN("12345");
-        registerPage.fillUsername("Mat7");
+        registerPage.fillUsername("Mat");
         registerPage.fillPassword("test");
         registerPage.fillConfirmationPassword("te");
         registerPage.clickRegisterButton();

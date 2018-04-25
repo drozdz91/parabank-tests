@@ -16,4 +16,8 @@ public class AccountPage extends MainPage {
     public String getRegisterConfirmationText() {
         return driver.findElement(By.xpath("//div[@id='rightPanel']/p")).getText();
     }
+
+    public String getFoundLoginInfoConfirmationText() {
+        return driver.findElement(By.xpath("//div[@id='rightPanel']/p[1]")).getText();
+    }
 }
