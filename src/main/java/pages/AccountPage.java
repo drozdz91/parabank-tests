@@ -12,12 +12,4 @@ public class AccountPage extends MainPage {
     public boolean isUserLoggedIn() {
         return driver.findElement(By.xpath("//a[@href='/parabank/logout.htm']")).isDisplayed();
     }
-
-    public String getRegisterConfirmationText() {
-        return driver.findElement(By.xpath("//div[@id='rightPanel']/p")).getText();
-    }
-
-    public String getFoundLoginInfoConfirmationText() {
-        return driver.findElement(By.xpath("//div[@id='rightPanel']/p[1]")).getText();
-    }
 }

@@ -4,20 +4,20 @@ import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import pages.AccountPage;
 import pages.CustomerLookupPage;
+import pages.ForgotLoginSuccessPage;
 
 public class ForgotLoginInfoTest {
 
     WebDriver driver;
     CustomerLookupPage customerLookupPage;
-    AccountPage accountPage;
+    ForgotLoginSuccessPage forgotLoginSuccessPage;
 
     @BeforeMethod
     public void before() {
         driver = new ChromeDriver();
         customerLookupPage = new CustomerLookupPage(driver);
-        accountPage = new AccountPage(driver);
+        forgotLoginSuccessPage = new ForgotLoginSuccessPage(driver);
     }
 
     @Test
@@ -31,7 +31,7 @@ public class ForgotLoginInfoTest {
         customerLookupPage.fillZipCode("11-111");
         customerLookupPage.fillSSN("12345");
         customerLookupPage.clickMyLoginInfoButton();
-        Assert.assertEquals(accountPage.getFoundLoginInfoConfirmationText(),
+        Assert.assertEquals(forgotLoginSuccessPage.getFoundLoginInfoConfirmationText(),
                 "Your login information was located successfully. You are now logged in.");
     }
 

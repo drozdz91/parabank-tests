@@ -4,20 +4,20 @@ import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import pages.AccountPage;
 import pages.RegisterPage;
+import pages.RegistrationSuccessPage;
 
 public class RegistrationTest {
 
     WebDriver driver;
     RegisterPage registerPage;
-    AccountPage accountPage;
+    RegistrationSuccessPage registrationSuccessPage;
 
     @BeforeMethod
     public void before() {
         driver = new ChromeDriver();
         registerPage = new RegisterPage(driver);
-        accountPage = new AccountPage(driver);
+        registrationSuccessPage = new RegistrationSuccessPage(driver);
     }
 
     @Test
@@ -34,7 +34,7 @@ public class RegistrationTest {
         registerPage.fillPassword("test");
         registerPage.fillConfirmationPassword("test");
         registerPage.clickRegisterButton();
-        Assert.assertEquals(accountPage.getRegisterConfirmationText(),
+        Assert.assertEquals(registrationSuccessPage.getRegisterConfirmationText(),
                 "Your account was created successfully. You are now logged in.");
     }
 
