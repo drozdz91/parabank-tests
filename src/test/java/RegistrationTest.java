@@ -92,16 +92,8 @@ public class RegistrationTest {
                 "Passwords did not match.");
     }
 
-<<<<<<< HEAD
-        String expectedTitle = "Passwords did not match.";
-        String actualTitle = driver.findElement(By.xpath("//span[@id='repeatedPassword.errors']")).getText();
-        Assert.assertEquals(actualTitle, expectedTitle);
-        System.out.println("Test case 4 - shouldNotRegisterWithIncorrectConfirmPassword: PASSED.");
-        driver.quit();
-=======
     @AfterMethod
     public void after() {
         driver.close();
->>>>>>> zajecia_6
     }
 }

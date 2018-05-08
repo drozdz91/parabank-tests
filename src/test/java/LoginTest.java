@@ -47,15 +47,8 @@ public class LoginTest {
         Assert.assertEquals(indexPage.getErrorText(), "Please enter a username and password.");
     }
 
-<<<<<<< HEAD
-        String expectedTitle = "Please enter a username and password.";
-        String actualTitle = driver.findElement(By.xpath("//p[@class='error']")).getText();
-        Assert.assertEquals(actualTitle, expectedTitle);
-        driver.quit();
-=======
     @AfterMethod
     public void after() {
         driver.close();
->>>>>>> zajecia_6
     }
 }
