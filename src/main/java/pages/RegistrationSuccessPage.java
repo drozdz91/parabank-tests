@@ -1,15 +1,16 @@
 package pages;
 
-import org.openqa.selenium.By;
+import assertions.RegisterAssertion;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.PageFactory;
 
 public class RegistrationSuccessPage extends MainPage {
 
+    public RegisterAssertion registerAssertion;
+
     public RegistrationSuccessPage(WebDriver driver) {
         super(driver);
-    }
-
-    public String getRegisterConfirmationText() {
-        return driver.findElement(By.xpath("//div[@id='rightPanel']/p")).getText();
+        PageFactory.initElements(driver, this);
+        registerAssertion = new RegisterAssertion(driver);
     }
 }

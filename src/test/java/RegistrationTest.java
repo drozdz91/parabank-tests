@@ -1,99 +1,76 @@
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import pages.RegisterPage;
-import pages.RegistrationSuccessPage;
 
-public class RegistrationTest {
-
-    WebDriver driver;
-    RegisterPage registerPage;
-    RegistrationSuccessPage registrationSuccessPage;
-
-    @BeforeMethod
-    public void before() {
-        driver = new ChromeDriver();
-        registerPage = new RegisterPage(driver);
-        registrationSuccessPage = new RegistrationSuccessPage(driver);
-    }
+public class RegistrationTest extends MainTest {
 
     @Test
     public void shouldRegister() {
-        registerPage.openRegisterPage();
-        registerPage.fillFirstName("Mat");
-        registerPage.fillLastName("Dro");
-        registerPage.fillAddress("Teczowa");
-        registerPage.fillCity("Koszalin");
-        registerPage.fillState("zachodniopomorskie");
-        registerPage.fillZipCode("11-111");
-        registerPage.fillSSN("12345");
-        registerPage.fillUsername("Mat");
-        registerPage.fillPassword("test");
-        registerPage.fillConfirmationPassword("test");
-        registerPage.clickRegisterButton();
-        Assert.assertEquals(registrationSuccessPage.getRegisterConfirmationText(),
-                "Your account was created successfully. You are now logged in.");
+        indexPage.openIndexPage()
+                .clickRegisterLink()
+                .fillFirstName("Mat")
+                .fillLastName("Dro")
+                .fillAddress("Teczowa")
+                .fillCity("Koszalin")
+                .fillState("zachodniopomorskie")
+                .fillZipCode("11-111")
+                .fillSSN("12345")
+                .fillUsername("Mat")
+                .fillPassword("test")
+                .fillConfirmationPassword("test")
+                .clickRegisterButton()
+                .registerAssertion.getRegisterConfirmationText();
     }
 
     @Test(priority = 1)
     public void shouldNotRegisterWithTheSameUsername() {
-        registerPage.openRegisterPage();
-        registerPage.fillFirstName("Mat");
-        registerPage.fillLastName("Dro");
-        registerPage.fillAddress("Teczowa");
-        registerPage.fillCity("Koszalin");
-        registerPage.fillState("zachodniopomorskie");
-        registerPage.fillZipCode("11-111");
-        registerPage.fillSSN("12345");
-        registerPage.fillUsername("Mat");
-        registerPage.fillPassword("test");
-        registerPage.fillConfirmationPassword("test");
-        registerPage.clickRegisterButton();
-        Assert.assertEquals(registerPage.getErrorTheSameUsernameText(),
-                "This username already exists.");
+        indexPage.openIndexPage()
+                .clickRegisterLink()
+                .fillFirstName("Mat")
+                .fillLastName("Dro")
+                .fillAddress("Teczowa")
+                .fillCity("Koszalin")
+                .fillState("zachodniopomorskie")
+                .fillZipCode("11-111")
+                .fillSSN("12345")
+                .fillUsername("Mat")
+                .fillPassword("test")
+                .fillConfirmationPassword("test")
+                .clickRegisterButton()
+                .registerAssertion.getErrorTheSameUsernameText();
     }
 
     @Test(priority = 2)
     public void shouldNotRegisterWithoutUsername() {
-        registerPage.openRegisterPage();
-        registerPage.fillFirstName("Mat");
-        registerPage.fillLastName("Dro");
-        registerPage.fillAddress("Teczowa");
-        registerPage.fillCity("Koszalin");
-        registerPage.fillState("zachodniopomorskie");
-        registerPage.fillZipCode("11-111");
-        registerPage.fillSSN("12345");
-        registerPage.fillUsername("");
-        registerPage.fillPassword("test");
-        registerPage.fillConfirmationPassword("test");
-        registerPage.clickRegisterButton();
-        Assert.assertEquals(registerPage.getErrorWithoutUsernameText(),
-                "Username is required.");
+        indexPage.openIndexPage()
+                .clickRegisterLink()
+                .fillFirstName("Mat")
+                .fillLastName("Dro")
+                .fillAddress("Teczowa")
+                .fillCity("Koszalin")
+                .fillState("zachodniopomorskie")
+                .fillZipCode("11-111")
+                .fillSSN("12345")
+                .fillUsername("")
+                .fillPassword("test")
+                .fillConfirmationPassword("test")
+                .clickRegisterButton()
+                .registerAssertion.getErrorWithoutUsernameText();
     }
 
     @Test(priority = 3)
     public void shouldNotRegisterWithWrongConfirmPassword() {
-        registerPage.openRegisterPage();
-        registerPage.fillFirstName("Mat");
-        registerPage.fillLastName("Dro");
-        registerPage.fillAddress("Teczowa");
-        registerPage.fillCity("Koszalin");
-        registerPage.fillState("zachodniopomorskie");
-        registerPage.fillZipCode("11-111");
-        registerPage.fillSSN("12345");
-        registerPage.fillUsername("Mat");
-        registerPage.fillPassword("test");
-        registerPage.fillConfirmationPassword("te");
-        registerPage.clickRegisterButton();
-        Assert.assertEquals(registerPage.getErrorWrongConfirmationPasswordText(),
-                "Passwords did not match.");
-    }
-
-    @AfterMethod
-    public void after() {
-        driver.close();
+        indexPage.openIndexPage()
+                .clickRegisterLink()
+                .fillFirstName("Mat")
+                .fillLastName("Dro")
+                .fillAddress("Teczowa")
+                .fillCity("Koszalin")
+                .fillState("zachodniopomorskie")
+                .fillZipCode("11-111")
+                .fillSSN("12345")
+                .fillUsername("Mat")
+                .fillPassword("test")
+                .fillConfirmationPassword("te")
+                .clickRegisterButton()
+                .registerAssertion.getErrorWrongConfirmationPasswordText();
     }
 }

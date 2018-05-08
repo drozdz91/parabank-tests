@@ -1,73 +1,107 @@
 package pages;
 
-import org.openqa.selenium.By;
+import assertions.RegisterAssertion;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class RegisterPage extends MainPage {
 
+    public RegisterAssertion registerAssertion;
+
+    @FindBy(xpath = "//input[@id='customer.firstName']")
+    private WebElement firstNameInput;
+
+    @FindBy(xpath = "//input[@id='customer.lastName']")
+    private WebElement lastNameInput;
+
+    @FindBy(xpath = "//input[@id='customer.address.street']")
+    private WebElement addressInput;
+
+    @FindBy(xpath = "//input[@id='customer.address.city']")
+    private WebElement cityInput;
+
+    @FindBy(xpath = "//input[@id='customer.address.state']")
+    private WebElement stateInput;
+
+    @FindBy(xpath = "//input[@id='customer.address.zipCode']")
+    private WebElement zipCodeInput;
+
+    @FindBy(xpath = "//input[@id='customer.ssn']")
+    private WebElement ssnInput;
+
+    @FindBy(xpath = "//input[@id='customer.username']")
+    private WebElement userNameInput;
+
+    @FindBy(xpath = "//input[@id='customer.password']")
+    private WebElement passwordInput;
+
+    @FindBy(xpath = "//input[@id='repeatedPassword']")
+    private WebElement confirmationPasswordInput;
+
+    @FindBy(xpath = "//input[@class='button' and @value='Register']")
+    private WebElement registerButton;
+
     public RegisterPage(WebDriver driver) {
         super(driver);
+        PageFactory.initElements(driver, this);
+        registerAssertion = new RegisterAssertion(driver);
     }
 
-    public void openRegisterPage() {
-        driver.get("http://parabank.parasoft.com/parabank/register.htm");
+    public RegisterPage fillFirstName(String firstName) {
+        firstNameInput.sendKeys(firstName);
+        return this;
+    }
+
+    public RegisterPage fillLastName(String lastName) {
+        lastNameInput.sendKeys(lastName);
+        return this;
+    }
+
+    public RegisterPage fillAddress(String address) {
+        addressInput.sendKeys(address);
+        return this;
+    }
+
+    public RegisterPage fillCity(String city) {
+        cityInput.sendKeys(city);
+        return this;
+    }
+
+    public RegisterPage fillState(String state) {
+        stateInput.sendKeys(state);
+        return this;
+    }
+
+    public RegisterPage fillZipCode(String zipCode) {
+        zipCodeInput.sendKeys(zipCode);
+        return this;
+    }
+
+    public RegisterPage fillSSN(String ssn) {
+        ssnInput.sendKeys(ssn);
+        return this;
+    }
+
+    public RegisterPage fillUsername(String username) {
+        userNameInput.sendKeys(username);
+        return this;
+    }
+
+    public RegisterPage fillPassword(String password) {
+        passwordInput.sendKeys(password);
+        return this;
+    }
+
+    public RegisterPage fillConfirmationPassword(String confirmPassword) {
+        confirmationPasswordInput.sendKeys(confirmPassword);
+        return this;
+    }
+
+    public RegistrationSuccessPage clickRegisterButton() {
+        registerButton.click();
         waitForJStoLoad();
-    }
-
-    public void fillFirstName(String firstName) {
-        driver.findElement(By.xpath("//input[@id='customer.firstName']")).sendKeys(firstName);
-    }
-
-    public void fillLastName(String lastName) {
-        driver.findElement(By.xpath("//input[@id='customer.lastName']")).sendKeys(lastName);
-    }
-
-    public void fillAddress(String address) {
-        driver.findElement(By.xpath("//input[@id='customer.address.street']")).sendKeys(address);
-    }
-
-    public void fillCity(String city) {
-        driver.findElement(By.xpath("//input[@id='customer.address.city']")).sendKeys(city);
-    }
-
-    public void fillState(String state) {
-        driver.findElement(By.xpath("//input[@id='customer.address.state']")).sendKeys(state);
-    }
-
-    public void fillZipCode(String zipCode) {
-        driver.findElement(By.xpath("//input[@id='customer.address.zipCode']")).sendKeys(zipCode);
-    }
-
-    public void fillSSN(String ssn) {
-        driver.findElement(By.xpath("//input[@id='customer.ssn']")).sendKeys(ssn);
-    }
-
-    public void fillUsername(String username) {
-        driver.findElement(By.xpath("//input[@id='customer.username']")).sendKeys(username);
-    }
-
-    public void fillPassword(String password) {
-        driver.findElement(By.xpath("//input[@id='customer.password']")).sendKeys(password);
-    }
-
-    public void fillConfirmationPassword(String confirmPassword) {
-        driver.findElement(By.xpath("//input[@id='repeatedPassword']")).sendKeys(confirmPassword);
-    }
-
-    public void clickRegisterButton() {
-        driver.findElement(By.xpath("//input[@class='button' and @value='Register']")).click();
-        waitForJStoLoad();
-    }
-
-    public String getErrorTheSameUsernameText() {
-        return driver.findElement(By.xpath("//span[@id='customer.username.errors']")).getText();
-    }
-
-    public String getErrorWithoutUsernameText() {
-        return driver.findElement(By.xpath("//span[@id='customer.username.errors']")).getText();
-    }
-
-    public String getErrorWrongConfirmationPasswordText() {
-        return driver.findElement(By.xpath("//span[@id='repeatedPassword.errors']")).getText();
+        return new RegistrationSuccessPage(driver);
     }
 }

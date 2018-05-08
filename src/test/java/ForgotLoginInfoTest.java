@@ -1,24 +1,7 @@
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import pages.CustomerLookupPage;
-import pages.ForgotLoginSuccessPage;
 
-public class ForgotLoginInfoTest {
-
-    WebDriver driver;
-    CustomerLookupPage customerLookupPage;
-    ForgotLoginSuccessPage forgotLoginSuccessPage;
-
-    @BeforeMethod
-    public void before() {
-        driver = new ChromeDriver();
-        customerLookupPage = new CustomerLookupPage(driver);
-        forgotLoginSuccessPage = new ForgotLoginSuccessPage(driver);
-    }
+public class ForgotLoginInfoTest extends MainTest {
 
     @Test
     public void shouldFindLoginInfo() {
@@ -63,10 +46,5 @@ public class ForgotLoginInfoTest {
         customerLookupPage.clickMyLoginInfoButton();
         Assert.assertEquals(customerLookupPage.getErrorWithoutLastNameText(),
                 "Last name is required.");
-    }
-
-    @AfterMethod
-    public void after() {
-        driver.close();
     }
 }

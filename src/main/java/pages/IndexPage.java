@@ -1,33 +1,67 @@
 package pages;
 
-import org.openqa.selenium.By;
+import assertions.LoginAssertion;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class IndexPage extends MainPage {
 
+    public LoginAssertion loginAssertion;
+
+    @FindBy(xpath = "//input[@name='username']")
+    private WebElement userNameInput;
+
+    @FindBy(xpath = "//input[@name='password']")
+    private WebElement passwordInput;
+
+    @FindBy(xpath = "//input[@class='button' and @value='Log In']")
+    private WebElement loginButton;
+
+    @FindBy(xpath = "//a[contains(@href, 'register.htm') and text()='Register']")
+    private WebElement registerLink;
+
+    @FindBy(xpath = "//a[contains(@href, 'lookup.htm') and text()='Forgot login info?']")
+    private WebElement forgotLoginInfoLink;
+
     public IndexPage(WebDriver driver) {
         super(driver);
+        PageFactory.initElements(driver, this);
+        loginAssertion = new LoginAssertion(driver);
     }
 
-    public void openIndexPage() {
+    public IndexPage openIndexPage() {
         driver.get("http://parabank.parasoft.com/");
         waitForJStoLoad();
+        return this;
     }
 
-    public void fillUsername(String userName) {
-        driver.findElement(By.xpath("//input[@name='username']")).sendKeys(userName);
+    public IndexPage fillUsername(String userName) {
+        userNameInput.sendKeys(userName);
+        return this;
     }
 
-    public void fillPassword(String password) {
-        driver.findElement(By.xpath("//input[@name='password']")).sendKeys(password);
+    public IndexPage fillPassword(String password) {
+        passwordInput.sendKeys(password);
+        return this;
     }
 
-    public void clickLoginButton() {
-        driver.findElement(By.xpath("//input[@class='button' and @value='Log In']")).click();
+    public AccountPage clickLoginButton() {
+        loginButton.click();
         waitForJStoLoad();
+        return new AccountPage(driver);
     }
 
-    public String getErrorText() {
-        return driver.findElement(By.xpath("//p[@class='error']")).getText();
+    public RegisterPage clickRegisterLink() {
+        registerLink.click();
+        waitForJStoLoad();
+        return new RegisterPage(driver);
+    }
+
+    public CustomerLookupPage clickForgotLoginInfoLink() {
+        forgotLoginInfoLink.click();
+        waitForJStoLoad();
+        return new CustomerLookupPage(driver);
     }
 }
