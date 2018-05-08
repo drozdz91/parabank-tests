@@ -1,95 +1,107 @@
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.Wait;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import pages.RegisterPage;
+import pages.RegistrationSuccessPage;
 
 public class RegistrationTest {
-    public WebDriver driver = new ChromeDriver();
-    public String baseUrl = "http://parabank.parasoft.com/parabank/register.htm";
 
-    public void waitForPageLoad(WebDriver webDriver) {
-        Wait<WebDriver> wait = new WebDriverWait(webDriver, 30);
-        wait.until(webDriver1 -> ((JavascriptExecutor) webDriver).executeScript("return document.readyState"));
-    }
+    WebDriver driver;
+    RegisterPage registerPage;
+    RegistrationSuccessPage registrationSuccessPage;
 
-    public void register(String firstName, String lastName, String street, String city, String state,
-                         String zipCode, String ssn, String userName, String password, String confirmPassword,
-                         String registerButton) {
-        driver.findElement(By.xpath("//input[@id='customer.firstName']")).sendKeys(firstName);
-        driver.findElement(By.xpath("//input[@id='customer.lastName']")).sendKeys(lastName);
-        driver.findElement(By.xpath("//input[@id='customer.address.street']")).sendKeys(street);
-        driver.findElement(By.xpath("//input[@id='customer.address.city']")).sendKeys(city);
-        driver.findElement(By.xpath("//input[@id='customer.address.state']")).sendKeys(state);
-        driver.findElement(By.xpath("//input[@id='customer.address.zipCode']")).sendKeys(zipCode);
-        driver.findElement(By.xpath("//input[@id='customer.ssn']")).sendKeys(ssn);
-        driver.findElement(By.xpath("//input[@id='customer.username']")).sendKeys(userName);
-        driver.findElement(By.xpath("//input[@id='customer.password']")).sendKeys(password);
-        driver.findElement(By.xpath("//input[@id='repeatedPassword']")).sendKeys(confirmPassword);
-        driver.findElement(By.xpath(registerButton)).click();
+    @BeforeMethod
+    public void before() {
+        driver = new ChromeDriver();
+        registerPage = new RegisterPage(driver);
+        registrationSuccessPage = new RegistrationSuccessPage(driver);
     }
 
     @Test
-    public void shouldRegisterWithCorrectData() {
-        driver.get(baseUrl);
-        waitForPageLoad(driver);
-        register("Mat", "Dro", "Teczowa", "Koszalin", "zachodniopomorskie",
-                "11-111", "12345", "Mat", "test", "test",
-                "//input[@class='button' and @value='Register']");
-        waitForPageLoad(driver);
-
-        String expectedTitle = "Your account was created successfully. You are now logged in.";
-        String actualTitle = driver.findElement(By.xpath("//div[@id='rightPanel']/p")).getText();
-        Assert.assertEquals(actualTitle, expectedTitle);
-        System.out.println("Test case 1 - shouldRegisterWithCorrectData: PASSED.");
+    public void shouldRegister() {
+        registerPage.openRegisterPage();
+        registerPage.fillFirstName("Mat");
+        registerPage.fillLastName("Dro");
+        registerPage.fillAddress("Teczowa");
+        registerPage.fillCity("Koszalin");
+        registerPage.fillState("zachodniopomorskie");
+        registerPage.fillZipCode("11-111");
+        registerPage.fillSSN("12345");
+        registerPage.fillUsername("Mat");
+        registerPage.fillPassword("test");
+        registerPage.fillConfirmationPassword("test");
+        registerPage.clickRegisterButton();
+        Assert.assertEquals(registrationSuccessPage.getRegisterConfirmationText(),
+                "Your account was created successfully. You are now logged in.");
     }
 
     @Test(priority = 1)
     public void shouldNotRegisterWithTheSameUsername() {
-        driver.get(baseUrl);
-        waitForPageLoad(driver);
-        register("Mat", "Dro", "Teczowa", "Koszalin", "zachodniopomorskie",
-                "11-111", "12345", "Mat", "test", "test",
-                "//input[@class='button' and @value='Register']");
-        waitForPageLoad(driver);
-
-        String expectedTitle = "This username already exists.";
-        String actualTitle = driver.findElement(By.xpath("//span[@id='customer.username.errors']")).getText();
-        Assert.assertEquals(actualTitle, expectedTitle);
-        System.out.println("Test case 2 - shouldNotRegisterWithTheSameUsername: PASSED.");
+        registerPage.openRegisterPage();
+        registerPage.fillFirstName("Mat");
+        registerPage.fillLastName("Dro");
+        registerPage.fillAddress("Teczowa");
+        registerPage.fillCity("Koszalin");
+        registerPage.fillState("zachodniopomorskie");
+        registerPage.fillZipCode("11-111");
+        registerPage.fillSSN("12345");
+        registerPage.fillUsername("Mat");
+        registerPage.fillPassword("test");
+        registerPage.fillConfirmationPassword("test");
+        registerPage.clickRegisterButton();
+        Assert.assertEquals(registerPage.getErrorTheSameUsernameText(),
+                "This username already exists.");
     }
 
     @Test(priority = 2)
     public void shouldNotRegisterWithoutUsername() {
-        driver.get(baseUrl);
-        waitForPageLoad(driver);
-        register("Mat", "Dro", "Teczowa", "Koszalin", "zachodniopomorskie",
-                "11-111", "12345", "", "test", "test",
-                "//input[@class='button' and @value='Register']");
-        waitForPageLoad(driver);
-
-        String expectedTitle = "Username is required.";
-        String actualTitle = driver.findElement(By.xpath("//span[@id='customer.username.errors']")).getText();
-        Assert.assertEquals(actualTitle, expectedTitle);
-        System.out.println("Test case 3 - shouldNotRegisterWithoutUsername: PASSED.");
+        registerPage.openRegisterPage();
+        registerPage.fillFirstName("Mat");
+        registerPage.fillLastName("Dro");
+        registerPage.fillAddress("Teczowa");
+        registerPage.fillCity("Koszalin");
+        registerPage.fillState("zachodniopomorskie");
+        registerPage.fillZipCode("11-111");
+        registerPage.fillSSN("12345");
+        registerPage.fillUsername("");
+        registerPage.fillPassword("test");
+        registerPage.fillConfirmationPassword("test");
+        registerPage.clickRegisterButton();
+        Assert.assertEquals(registerPage.getErrorWithoutUsernameText(),
+                "Username is required.");
     }
 
     @Test(priority = 3)
-    public void shouldNotRegisterWithIncorrectConfirmPassword() {
-        driver.get(baseUrl);
-        waitForPageLoad(driver);
-        register("Mat", "Dro", "Teczowa", "Koszalin", "zachodniopomorskie",
-                "11-111", "12345", "Mat", "test", "te",
-                "//input[@class='button' and @value='Register']");
-        waitForPageLoad(driver);
+    public void shouldNotRegisterWithWrongConfirmPassword() {
+        registerPage.openRegisterPage();
+        registerPage.fillFirstName("Mat");
+        registerPage.fillLastName("Dro");
+        registerPage.fillAddress("Teczowa");
+        registerPage.fillCity("Koszalin");
+        registerPage.fillState("zachodniopomorskie");
+        registerPage.fillZipCode("11-111");
+        registerPage.fillSSN("12345");
+        registerPage.fillUsername("Mat");
+        registerPage.fillPassword("test");
+        registerPage.fillConfirmationPassword("te");
+        registerPage.clickRegisterButton();
+        Assert.assertEquals(registerPage.getErrorWrongConfirmationPasswordText(),
+                "Passwords did not match.");
+    }
 
+<<<<<<< HEAD
         String expectedTitle = "Passwords did not match.";
         String actualTitle = driver.findElement(By.xpath("//span[@id='repeatedPassword.errors']")).getText();
         Assert.assertEquals(actualTitle, expectedTitle);
         System.out.println("Test case 4 - shouldNotRegisterWithIncorrectConfirmPassword: PASSED.");
         driver.quit();
+=======
+    @AfterMethod
+    public void after() {
+        driver.close();
+>>>>>>> zajecia_6
     }
 }
