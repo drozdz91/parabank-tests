@@ -1,15 +1,16 @@
 package pages;
 
-import org.openqa.selenium.By;
+import assertions.ForgotLoginAssertion;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.PageFactory;
 
 public class ForgotLoginSuccessPage extends MainPage {
 
+    public ForgotLoginAssertion forgotLoginAssertion;
+
     public ForgotLoginSuccessPage(WebDriver driver) {
         super(driver);
-    }
-
-    public String getFoundLoginInfoConfirmationText() {
-        return driver.findElement(By.xpath("//div[@id='rightPanel']/p[1]")).getText();
+        PageFactory.initElements(driver, this);
+        forgotLoginAssertion = new ForgotLoginAssertion(driver);
     }
 }

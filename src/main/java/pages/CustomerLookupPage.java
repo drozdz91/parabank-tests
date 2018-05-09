@@ -1,57 +1,83 @@
 package pages;
 
-import org.openqa.selenium.By;
+import assertions.ForgotLoginAssertion;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class CustomerLookupPage extends MainPage {
 
+    public ForgotLoginAssertion forgotLoginAssertion;
+
+    @FindBy(xpath = "//input[@id='firstName']")
+    private WebElement firstNameInput;
+
+    @FindBy(xpath = "//input[@id='lastName']")
+    private WebElement lastNameInput;
+
+    @FindBy(xpath = "//input[@id='address.street']")
+    private WebElement addressInput;
+
+    @FindBy(xpath = "//input[@id='address.city']")
+    private WebElement cityInput;
+
+    @FindBy(xpath = "//input[@id='address.state']")
+    private WebElement stateInput;
+
+    @FindBy(xpath = "//input[@id='address.zipCode']")
+    private WebElement zipCodeInput;
+
+    @FindBy(xpath = "//input[@id='ssn']")
+    private WebElement ssnInput;
+
+    @FindBy(xpath = "//input[@class='button' and @value='Find My Login Info']")
+    private WebElement findMyLoginInfoButton;
+
     public CustomerLookupPage(WebDriver driver) {
         super(driver);
+        PageFactory.initElements(driver, this);
+        forgotLoginAssertion = new ForgotLoginAssertion(driver);
     }
 
-    public void openCustomerLookupPage() {
-        driver.get("http://parabank.parasoft.com/parabank/lookup.htm");
+    public CustomerLookupPage fillFirstName(String firstName) {
+        firstNameInput.sendKeys(firstName);
+        return this;
+    }
+
+    public CustomerLookupPage fillLastName(String lastName) {
+        lastNameInput.sendKeys(lastName);
+        return this;
+    }
+
+    public CustomerLookupPage fillAddress(String address) {
+        addressInput.sendKeys(address);
+        return this;
+    }
+
+    public CustomerLookupPage fillCity(String city) {
+        cityInput.sendKeys(city);
+        return this;
+    }
+
+    public CustomerLookupPage fillState(String state) {
+        stateInput.sendKeys(state);
+        return this;
+    }
+
+    public CustomerLookupPage fillZipCode(String zipCode) {
+        zipCodeInput.sendKeys(zipCode);
+        return this;
+    }
+
+    public CustomerLookupPage fillSSN(String ssn) {
+        ssnInput.sendKeys(ssn);
+        return this;
+    }
+
+    public ForgotLoginSuccessPage clickMyLoginInfoButton() {
+        findMyLoginInfoButton.click();
         waitForJStoLoad();
-    }
-
-    public void fillFirstName(String firstName) {
-        driver.findElement(By.xpath("//input[@id='firstName']")).sendKeys(firstName);
-    }
-
-    public void fillLastName(String lastName) {
-        driver.findElement(By.xpath("//input[@id='lastName']")).sendKeys(lastName);
-    }
-
-    public void fillAddress(String address) {
-        driver.findElement(By.xpath("//input[@id='address.street']")).sendKeys(address);
-    }
-
-    public void fillCity(String city) {
-        driver.findElement(By.xpath("//input[@id='address.city']")).sendKeys(city);
-    }
-
-    public void fillState(String state) {
-        driver.findElement(By.xpath("//input[@id='address.state']")).sendKeys(state);
-    }
-
-    public void fillZipCode(String zipCode) {
-        driver.findElement(By.xpath("//input[@id='address.zipCode']")).sendKeys(zipCode);
-    }
-
-    public void fillSSN(String ssn) {
-        driver.findElement(By.xpath("//input[@id='ssn']")).sendKeys(ssn);
-    }
-
-    public void clickMyLoginInfoButton() {
-        driver.findElement(By.xpath("//input[@class='button' and @value='Find My Login Info']")).click();
-        waitForJStoLoad();
-    }
-
-    public String getErrorWithoutFirstNameText() {
-        return driver.findElement(By.xpath("//span[@id='firstName.errors']")).getText();
-    }
-
-    public String getErrorWithoutLastNameText() {
-        return driver.findElement(By.xpath("//span[@id='lastName.errors']")).getText();
+        return new ForgotLoginSuccessPage(driver);
     }
 }

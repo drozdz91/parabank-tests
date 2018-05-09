@@ -9,22 +9,10 @@ public class MainTest {
     WebDriver driver;
     IndexPage indexPage;
 
-    RegisterPage registerPage;
-    RegistrationSuccessPage registrationSuccessPage;
-
-    CustomerLookupPage customerLookupPage;
-    ForgotLoginSuccessPage forgotLoginSuccessPage;
-
     @BeforeMethod
     public void before() {
         driver = new ChromeDriver();
         indexPage = new IndexPage(driver);
-
-        registerPage = new RegisterPage(driver);
-        registrationSuccessPage = new RegistrationSuccessPage(driver);
-
-        customerLookupPage = new CustomerLookupPage(driver);
-        forgotLoginSuccessPage = new ForgotLoginSuccessPage(driver);
     }
 
     @AfterMethod
