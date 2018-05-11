@@ -9,7 +9,7 @@ import pages.MainPage;
 
 public class ForgotLoginAssertion extends MainPage {
 
-    @FindBy(xpath = "//div[@id='rightPanel']/p[1]")
+    @FindBy(xpath = "//div[@id='rightPanel']/p")
     private WebElement foundLoginInfoConfirmationText;
 
     @FindBy(xpath = "//span[@id='firstName.errors']")
