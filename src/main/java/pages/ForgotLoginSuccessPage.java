@@ -4,7 +4,7 @@ import assertions.ForgotLoginAssertion;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
-public class ForgotLoginSuccessPage extends MainPage {
+public class ForgotLoginSuccessPage extends LoggedInPage {
 
     public ForgotLoginAssertion forgotLoginAssertion;
 
