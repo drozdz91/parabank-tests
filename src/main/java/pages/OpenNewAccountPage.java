@@ -26,9 +26,9 @@ public class OpenNewAccountPage extends LoggedInPage {
         openAccountAssertion = new OpenAccountAssertion(driver);
     }
 
-    public OpenNewAccountPage selectTypeOfAccount(String value) {
+    public OpenNewAccountPage selectTypeOfAccount(String type) {
         Select accountType = new Select(selectAccountType);
-        accountType.selectByValue(value);
+        accountType.selectByValue(type);
         return this;
     }
 
