@@ -1,22 +1,13 @@
 import org.testng.annotations.Test;
+import scenarios.RegisterScenario;
 
 public class RegistrationTest extends MainTest {
 
     @Test
     public void shouldRegister() {
-        indexPage.openIndexPage()
-                .clickRegisterLink()
-                .fillFirstName("Mat")
-                .fillLastName("Dro")
-                .fillAddress("Teczowa")
-                .fillCity("Koszalin")
-                .fillState("zachodniopomorskie")
-                .fillZipCode("11-111")
-                .fillSSN("12345")
-                .fillUsername("Mat")
-                .fillPassword("test")
-                .fillConfirmationPassword("test")
-                .clickRegisterButton()
+        indexPage.run(new RegisterScenario("Mat", "Dro", "Teczowa", "Koszalin",
+                "zachodniopomorskie", "11-111", "12345", "Mat", "test",
+                "test"))
                 .registerAssertion.getRegisterConfirmationText();
     }
 

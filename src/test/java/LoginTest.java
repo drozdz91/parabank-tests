@@ -1,13 +1,11 @@
 import org.testng.annotations.Test;
+import scenarios.LoginScenario;
 
 public class LoginTest extends MainTest {
 
     @Test
     public void shouldLogin() {
-        indexPage.openIndexPage()
-                .fillUsername("Mat")
-                .fillPassword("test")
-                .clickLoginButton()
+        indexPage.run(new LoginScenario("Mat", "test"))
                 .loginAssertion.isUserLoggedIn();
     }
 

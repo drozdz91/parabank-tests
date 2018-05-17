@@ -4,7 +4,7 @@ import assertions.RegisterAssertion;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
-public class RegistrationSuccessPage extends MainPage {
+public class RegistrationSuccessPage extends LoggedInPage {
 
     public RegisterAssertion registerAssertion;
 
