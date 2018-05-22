@@ -9,10 +9,6 @@ public class AccountTest extends MainTest {
     public void shouldAddAccount() {
         indexPage.run(new LoginScenario("Mat", "test"))
                 .menu.run(new OpenNewAccountScenario("CHECKING", "13566"))
-                /*.menu.clickOpenNewAccountLink()
-                .selectTypeOfAccount("CHECKING")
-                .selectAccountToTransfer("13677")
-                .clickOpenNewAccountButton()*/
                 .openAccountAssertion.getAccountOpenedConfirmation();
     }
 }
