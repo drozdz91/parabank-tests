@@ -16,7 +16,7 @@ public class AccountTest extends MainTest {
 
     @Test
     public void shouldAddAccount() {
-                accountPage.menu.run(new OpenNewAccountScenario("CHECKING", "14010"))
+        accountPage.menu.run(new OpenNewAccountScenario("CHECKING", "14010"))
                 .openAccountAssertion.getAccountOpenedConfirmation();
     }
 }
