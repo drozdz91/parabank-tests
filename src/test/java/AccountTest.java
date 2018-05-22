@@ -8,11 +8,7 @@ public class AccountTest extends MainTest {
     @Test
     public void shouldAddAccount() {
         indexPage.run(new LoginScenario("Mat", "test"))
-                .menu.run(new OpenNewAccountScenario("CHECKING", "13566"))
-                /*.menu.clickOpenNewAccountLink()
-                .selectTypeOfAccount("CHECKING")
-                .selectAccountToTransfer("13677")
-                .clickOpenNewAccountButton()*/
+                .menu.run(new OpenNewAccountScenario("CHECKING", "14010"))
                 .openAccountAssertion.getAccountOpenedConfirmation();
     }
 }

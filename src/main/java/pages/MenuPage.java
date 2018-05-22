@@ -16,6 +16,21 @@ public class MenuPage extends MainPage {
     @FindBy(xpath = "//a[contains(@href, '/parabank/transfer.htm') and text()='Transfer Funds']")
     private WebElement transferFundsLink;
 
+    @FindBy(xpath = "//a[contains(@href, '/parabank/billpay.htm') and text()='Bill Pay']")
+    private WebElement billPayLink;
+
+    @FindBy(xpath = "//a[contains(@href, '/parabank/findtrans.htm') and text()='Find Transactions']")
+    private WebElement findTransactionsLink;
+
+    @FindBy(xpath = "//a[contains(@href, '/parabank/updateprofile.htm') and text()='Update Contact Info']")
+    private WebElement updateContactInfoLink;
+
+    @FindBy(xpath = "//a[contains(@href, '/parabank/requestloan.htm') and text()='Request Loan']")
+    private WebElement requestLoanLink;
+
+    @FindBy(xpath = "//a[contains(@href, '/parabank/logout.htm') and text()='Log Out']")
+    private WebElement logOutLink;
+
     public MenuPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
@@ -27,7 +42,7 @@ public class MenuPage extends MainPage {
         return new OpenNewAccountPage(driver);
     }
 
-    public AccountPage clickAccountsOverview() {
+    public AccountPage clickAccountsOverviewLink() {
         accountsOverviewLink.click();
         waitForJStoLoad();
         return new AccountPage(driver);
@@ -37,5 +52,11 @@ public class MenuPage extends MainPage {
         transferFundsLink.click();
         waitForJStoLoad();
         return new TransferFundsPage(driver);
+    }
+
+    public IndexPage clickLogOutLink() {
+        logOutLink.click();
+        waitForJStoLoad();
+        return new IndexPage(driver);
     }
 }
