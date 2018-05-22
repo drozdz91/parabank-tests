@@ -1,5 +1,6 @@
 import org.testng.annotations.Test;
 import scenarios.LoginScenario;
+import scenarios.OpenNewAccountScenario;
 
 
 public class AccountTest extends MainTest {
@@ -7,10 +8,11 @@ public class AccountTest extends MainTest {
     @Test
     public void shouldAddAccount() {
         indexPage.run(new LoginScenario("Mat", "test"))
-                .menu.clickOpenNewAccountLink()
+                .menu.run(new OpenNewAccountScenario("CHECKING", "13566"))
+                /*.menu.clickOpenNewAccountLink()
                 .selectTypeOfAccount("CHECKING")
                 .selectAccountToTransfer("13677")
-                .clickOpenNewAccountButton()
+                .clickOpenNewAccountButton()*/
                 .openAccountAssertion.getAccountOpenedConfirmation();
     }
 }

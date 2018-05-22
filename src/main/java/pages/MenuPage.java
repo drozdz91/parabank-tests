@@ -7,15 +7,24 @@ import org.openqa.selenium.support.PageFactory;
 
 public class MenuPage extends MainPage {
 
+    @FindBy(xpath = "//a[contains(@href, '/parabank/openaccount.htm') and text()='Open New Account']")
+    private WebElement openNewAccountLink;
+
     @FindBy(xpath = "//a[contains(@href, '/parabank/overview.htm') and text()='Accounts Overview']")
     private WebElement accountsOverviewLink;
 
-    @FindBy(xpath = "//a[contains(@href, '/parabank/openaccount.htm') and text()='Open New Account']")
-    private WebElement openNewAccountLink;
+    @FindBy(xpath = "//a[contains(@href, '/parabank/transfer.htm') and text()='Transfer Funds']")
+    private WebElement transferFundsLink;
 
     public MenuPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
+    }
+
+    public OpenNewAccountPage clickOpenNewAccountLink() {
+        openNewAccountLink.click();
+        waitForJStoLoad();
+        return new OpenNewAccountPage(driver);
     }
 
     public AccountPage clickAccountsOverview() {
@@ -24,9 +33,9 @@ public class MenuPage extends MainPage {
         return new AccountPage(driver);
     }
 
-    public OpenNewAccountPage clickOpenNewAccountLink() {
-        openNewAccountLink.click();
+    public TransferFundsPage clickTransferFundsLink() {
+        transferFundsLink.click();
         waitForJStoLoad();
-        return new OpenNewAccountPage(driver);
+        return new TransferFundsPage(driver);
     }
 }
