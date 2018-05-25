@@ -3,10 +3,17 @@ import scenarios.ForgotLoginScenario;
 
 public class ForgotLoginInfoTest extends MainTest {
 
+    private final String firstName = "Mat";
+    private final String lastName = "Dro";
+    private final String address = "Teczowa";
+    private final String city = "Koszalin";
+    private final String state = "zachodniopomorskie";
+    private final String zipCode = "11-111";
+    private final String ssn = "12345";
+
     @Test
     public void shouldFindLoginInfo() {
-        indexPage.run(new ForgotLoginScenario("Mat", "Dro", "Teczowa", "Koszalin",
-                "zachodniopomorskie", "11-111", "12345"))
+        indexPage.run(new ForgotLoginScenario(firstName, lastName, address, city, state, zipCode, ssn))
                 .forgotLoginAssertion.getFoundLoginInfoConfirmationText();
     }
 
@@ -15,12 +22,12 @@ public class ForgotLoginInfoTest extends MainTest {
         indexPage.openIndexPage()
                 .clickForgotLoginInfoLink()
                 .fillFirstName("")
-                .fillLastName("Dro")
-                .fillAddress("Teczowa")
-                .fillCity("Koszalin")
-                .fillState("zachodniopomorskie")
-                .fillZipCode("11-111")
-                .fillSSN("12345")
+                .fillLastName(lastName)
+                .fillAddress(address)
+                .fillCity(city)
+                .fillState(state)
+                .fillZipCode(zipCode)
+                .fillSSN(ssn)
                 .clickMyLoginInfoButton()
                 .forgotLoginAssertion.getErrorWithoutFirstNameText();
     }
@@ -29,13 +36,13 @@ public class ForgotLoginInfoTest extends MainTest {
     public void shouldNotFindLoginInfoWithoutLastName() {
         indexPage.openIndexPage()
                 .clickForgotLoginInfoLink()
-                .fillFirstName("Mat")
+                .fillFirstName(firstName)
                 .fillLastName("")
-                .fillAddress("Teczowa")
-                .fillCity("Koszalin")
-                .fillState("zachodniopomorskie")
-                .fillZipCode("11-111")
-                .fillSSN("12345")
+                .fillAddress(address)
+                .fillCity(city)
+                .fillState(state)
+                .fillZipCode(zipCode)
+                .fillSSN(ssn)
                 .clickMyLoginInfoButton()
                 .forgotLoginAssertion.getErrorWithoutLastNameText();
     }

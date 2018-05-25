@@ -3,11 +3,18 @@ import scenarios.RegisterScenario;
 
 public class RegistrationTest extends MainTest {
 
+    private final String firstName = "Mat";
+    private final String lastName = "Dro";
+    private final String address = "Teczowa";
+    private final String city = "Koszalin";
+    private final String state = "zachodniopomorskie";
+    private final String zipCode = "11-111";
+    private final String ssn = "12345";
+
     @Test
     public void shouldRegister() {
-        indexPage.run(new RegisterScenario("Mat", "Dro", "Teczowa", "Koszalin",
-                "zachodniopomorskie", "11-111", "12345", "Mat", "test",
-                "test"))
+        indexPage.run(new RegisterScenario(firstName, lastName, address, city, state, zipCode, ssn, "Mat",
+                "test", "test"))
                 .registerAssertion.getRegisterConfirmationText();
     }
 
@@ -15,13 +22,13 @@ public class RegistrationTest extends MainTest {
     public void shouldNotRegisterWithTheSameUsername() {
         indexPage.openIndexPage()
                 .clickRegisterLink()
-                .fillFirstName("Mat")
-                .fillLastName("Dro")
-                .fillAddress("Teczowa")
-                .fillCity("Koszalin")
-                .fillState("zachodniopomorskie")
-                .fillZipCode("11-111")
-                .fillSSN("12345")
+                .fillFirstName(firstName)
+                .fillLastName(lastName)
+                .fillAddress(address)
+                .fillCity(city)
+                .fillState(state)
+                .fillZipCode(zipCode)
+                .fillSSN(ssn)
                 .fillUsername("Mat")
                 .fillPassword("test")
                 .fillConfirmationPassword("test")
@@ -33,13 +40,13 @@ public class RegistrationTest extends MainTest {
     public void shouldNotRegisterWithoutUsername() {
         indexPage.openIndexPage()
                 .clickRegisterLink()
-                .fillFirstName("Mat")
-                .fillLastName("Dro")
-                .fillAddress("Teczowa")
-                .fillCity("Koszalin")
-                .fillState("zachodniopomorskie")
-                .fillZipCode("11-111")
-                .fillSSN("12345")
+                .fillFirstName(firstName)
+                .fillLastName(lastName)
+                .fillAddress(address)
+                .fillCity(city)
+                .fillState(state)
+                .fillZipCode(zipCode)
+                .fillSSN(ssn)
                 .fillUsername("")
                 .fillPassword("test")
                 .fillConfirmationPassword("test")
@@ -51,13 +58,13 @@ public class RegistrationTest extends MainTest {
     public void shouldNotRegisterWithWrongConfirmPassword() {
         indexPage.openIndexPage()
                 .clickRegisterLink()
-                .fillFirstName("Mat")
-                .fillLastName("Dro")
-                .fillAddress("Teczowa")
-                .fillCity("Koszalin")
-                .fillState("zachodniopomorskie")
-                .fillZipCode("11-111")
-                .fillSSN("12345")
+                .fillFirstName(firstName)
+                .fillLastName(lastName)
+                .fillAddress(address)
+                .fillCity(city)
+                .fillState(state)
+                .fillZipCode(zipCode)
+                .fillSSN(ssn)
                 .fillUsername("Mat")
                 .fillPassword("test")
                 .fillConfirmationPassword("te")

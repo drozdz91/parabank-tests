@@ -54,6 +54,12 @@ public class MenuPage extends MainPage {
         return new TransferFundsPage(driver);
     }
 
+    public FindTransactionsPage clickFindTransactionsLink() {
+        findTransactionsLink.click();
+        waitForJStoLoad();
+        return new FindTransactionsPage(driver);
+    }
+
     public IndexPage clickLogOutLink() {
         logOutLink.click();
         waitForJStoLoad();

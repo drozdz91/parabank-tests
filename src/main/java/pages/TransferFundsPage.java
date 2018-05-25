@@ -34,15 +34,15 @@ public class TransferFundsPage extends LoggedInPage {
         return this;
     }
 
-    public TransferFundsPage selectFromAccount(String from) {
+    public TransferFundsPage selectFromAccount() {
         Select fromAccount = new Select(selectTransferFromAccount);
-        fromAccount.selectByValue(from);
+        fromAccount.selectByIndex(0);
         return this;
     }
 
-    public TransferFundsPage selectToAccount(String to) {
+    public TransferFundsPage selectToAccount() {
         Select toAccount = new Select(selectTransferToAccount);
-        toAccount.selectByValue(to);
+        toAccount.selectByIndex(1);
         return this;
     }
 

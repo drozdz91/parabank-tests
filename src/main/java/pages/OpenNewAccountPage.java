@@ -32,9 +32,9 @@ public class OpenNewAccountPage extends LoggedInPage {
         return this;
     }
 
-    public OpenNewAccountPage selectAccountToTransfer(String account) {
+    public OpenNewAccountPage selectAccountToTransfer() {
         Select accountToTransfer = new Select(selectAccountToTransferFunds);
-        accountToTransfer.selectByValue(account);
+        accountToTransfer.selectByIndex(0);
         return this;
     }
 

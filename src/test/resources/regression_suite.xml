@@ -1,0 +1,15 @@
+<suite name="Regression Suite">
+    <parameter name="url" value="http://parabank.parasoft.com/"/>
+    <parameter name="login" value="Mat"/>
+    <parameter name="password" value="test"/>
+
+    <test name="AccountTest">
+        <classes>
+            <!--<class name="AccountTest"/>-->
+            <!--<class name="RegistrationTest"/>-->
+            <class name="FindTransactionsTest"/>
+            <!--<class name="ForgotLoginInfoTest"/>-->
+        </classes>
+    </test>
+
+</suite>

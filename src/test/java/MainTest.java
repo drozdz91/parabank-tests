@@ -2,17 +2,19 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Parameters;
 import pages.*;
 
-public class MainTest {
+public abstract class MainTest {
 
-    WebDriver driver;
-    IndexPage indexPage;
+    protected WebDriver driver;
+    protected IndexPage indexPage;
 
     @BeforeMethod
-    public void before() {
+    @Parameters({"url"})
+    public void before(String url) {
         driver = new ChromeDriver();
-        indexPage = new IndexPage(driver);
+        indexPage = new IndexPage(driver, url);
     }
 
     @AfterMethod

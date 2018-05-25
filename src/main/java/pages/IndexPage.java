@@ -8,6 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class IndexPage extends MainPage {
 
+    private String url;
     public LoginAssertion loginAssertion;
 
     @FindBy(xpath = "//input[@name='username']")
@@ -25,6 +26,13 @@ public class IndexPage extends MainPage {
     @FindBy(xpath = "//a[contains(@href, 'lookup.htm') and text()='Forgot login info?']")
     private WebElement forgotLoginInfoLink;
 
+    public IndexPage(WebDriver driver, String url) {
+        super(driver);
+        PageFactory.initElements(driver, this);
+        loginAssertion = new LoginAssertion(driver);
+        this.url = url;
+    }
+
     public IndexPage(WebDriver driver) {
         super(driver);
         PageFactory.initElements(driver, this);
@@ -32,7 +40,7 @@ public class IndexPage extends MainPage {
     }
 
     public IndexPage openIndexPage() {
-        driver.get("http://parabank.parasoft.com/");
+        driver.get(url);
         waitForJStoLoad();
         return this;
     }
