@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.ITestContext;
 
 public class FindTransactionsPage extends LoggedInPage {
 
@@ -41,15 +42,16 @@ public class FindTransactionsPage extends LoggedInPage {
     @FindBy(xpath = "//button[@value='AMOUNT']")
     private WebElement findTransactionsByAmountButton;
 
-    public FindTransactionsPage(WebDriver driver) {
-        super(driver);
+    public FindTransactionsPage(WebDriver driver, ITestContext context) {
+        super(driver, context);
         PageFactory.initElements(driver,this);
-        findTransactionsAssertion = new FindTransactionsAssertion(driver);
+        findTransactionsAssertion = new FindTransactionsAssertion(driver, getContext());
     }
 
-    public FindTransactionsPage selectAnAccount() {
+    public FindTransactionsPage selectAnAccount(String account) {
         Select accountId = new Select(selectAnAccount);
-        accountId.selectByIndex(1);
+        String accountValues = getContextAttribute(account);
+        accountId.selectByValue(accountValues);
         return this;
     }
 
@@ -61,7 +63,7 @@ public class FindTransactionsPage extends LoggedInPage {
     public TransactionResultsPage clickFindTransactionsByIdButton() {
         findTransactionsByIdButton.click();
         waitForJStoLoad();
-        return new TransactionResultsPage(driver);
+        return new TransactionResultsPage(driver, getContext());
     }
 
     public FindTransactionsPage fillFindByDate(String findByDate) {
@@ -72,7 +74,7 @@ public class FindTransactionsPage extends LoggedInPage {
     public TransactionResultsPage clickFindTransactionsByDateButton() {
         findTransactionsByDateButton.click();
         waitForJStoLoad();
-        return new TransactionResultsPage(driver);
+        return new TransactionResultsPage(driver, getContext());
     }
 
     public FindTransactionsPage fillFindByDateRangeFrom(String findByDateRangeFrom) {
@@ -88,7 +90,7 @@ public class FindTransactionsPage extends LoggedInPage {
     public TransactionResultsPage clickFindTransactionsByDateRangeButton() {
         findTransactionsByDateRangeButton.click();
         waitForJStoLoad();
-        return new TransactionResultsPage(driver);
+        return new TransactionResultsPage(driver, getContext());
     }
 
     public FindTransactionsPage fillFindByAmount(String findByAmount) {
@@ -99,6 +101,6 @@ public class FindTransactionsPage extends LoggedInPage {
     public TransactionResultsPage clickFindTransactionsByAmountButton() {
         findTransactionsByAmountButton.click();
         waitForJStoLoad();
-        return new TransactionResultsPage(driver);
+        return new TransactionResultsPage(driver, getContext());
     }
 }

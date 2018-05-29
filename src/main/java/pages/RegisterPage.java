@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.ITestContext;
 
 public class RegisterPage extends MainPage {
 
@@ -43,10 +44,10 @@ public class RegisterPage extends MainPage {
     @FindBy(xpath = "//input[@class='button' and @value='Register']")
     private WebElement registerButton;
 
-    public RegisterPage(WebDriver driver) {
-        super(driver);
+    public RegisterPage(WebDriver driver, ITestContext context) {
+        super(driver, context);
         PageFactory.initElements(driver, this);
-        registerAssertion = new RegisterAssertion(driver);
+        registerAssertion = new RegisterAssertion(driver, getContext());
     }
 
     public RegisterPage fillFirstName(String firstName) {
@@ -102,6 +103,6 @@ public class RegisterPage extends MainPage {
     public RegistrationSuccessPage clickRegisterButton() {
         registerButton.click();
         waitForJStoLoad();
-        return new RegistrationSuccessPage(driver);
+        return new RegistrationSuccessPage(driver, getContext());
     }
 }

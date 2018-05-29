@@ -8,7 +8,8 @@ import scenarios.OpenNewAccountScenario;
 
 public class AccountTest extends MainTest {
 
-    private final String accountType = "CHECKING";
+    private final String ACCOUNT_TYPE = "CHECKING";
+    private final String ACCOUNT_KEY = "accountKeyNumber";
     private AccountPage accountPage;
 
     @BeforeMethod
@@ -19,7 +20,8 @@ public class AccountTest extends MainTest {
 
     @Test
     public void shouldAddAccount() {
-        accountPage.menu.run(new OpenNewAccountScenario(accountType))
+        accountPage.getAccountNumber(ACCOUNT_KEY)
+                .menu.run(new OpenNewAccountScenario(ACCOUNT_TYPE, ACCOUNT_KEY))
                 .openAccountAssertion.getAccountOpenedConfirmation();
     }
 }

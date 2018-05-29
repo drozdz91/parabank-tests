@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
+import org.testng.ITestContext;
 import pages.MainPage;
 
 public class LoginAssertion extends MainPage {
@@ -15,8 +16,8 @@ public class LoginAssertion extends MainPage {
     @FindBy(xpath = "//p[@class='error']")
     private WebElement errorText;
 
-    public LoginAssertion(WebDriver driver) {
-        super(driver);
+    public LoginAssertion(WebDriver driver, ITestContext context) {
+        super(driver, context);
         PageFactory.initElements(driver, this);
     }
 

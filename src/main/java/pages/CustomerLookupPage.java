@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.ITestContext;
 
 public class CustomerLookupPage extends MainPage {
 
@@ -34,10 +35,10 @@ public class CustomerLookupPage extends MainPage {
     @FindBy(xpath = "//input[@class='button' and @value='Find My Login Info']")
     private WebElement findMyLoginInfoButton;
 
-    public CustomerLookupPage(WebDriver driver) {
-        super(driver);
+    public CustomerLookupPage(WebDriver driver, ITestContext context) {
+        super(driver, context);
         PageFactory.initElements(driver, this);
-        forgotLoginAssertion = new ForgotLoginAssertion(driver);
+        forgotLoginAssertion = new ForgotLoginAssertion(driver, getContext());
     }
 
     public CustomerLookupPage fillFirstName(String firstName) {
@@ -78,6 +79,6 @@ public class CustomerLookupPage extends MainPage {
     public ForgotLoginSuccessPage clickMyLoginInfoButton() {
         findMyLoginInfoButton.click();
         waitForJStoLoad();
-        return new ForgotLoginSuccessPage(driver);
+        return new ForgotLoginSuccessPage(driver, getContext());
     }
 }

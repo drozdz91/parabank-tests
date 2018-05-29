@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
+import org.testng.ITestContext;
 import pages.MainPage;
 
 public class RegisterAssertion extends MainPage {
@@ -21,8 +22,8 @@ public class RegisterAssertion extends MainPage {
     @FindBy(xpath = "//span[@id='repeatedPassword.errors']")
     private WebElement errorWrongConfirmationPasswordText;
 
-    public RegisterAssertion(WebDriver driver) {
-        super(driver);
+    public RegisterAssertion(WebDriver driver, ITestContext context) {
+        super(driver, context);
         PageFactory.initElements(driver, this);
     }
 

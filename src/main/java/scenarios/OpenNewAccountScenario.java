@@ -6,9 +6,11 @@ import pages.MenuPage;
 public class OpenNewAccountScenario implements Scenario<MenuPage, AccountOpenedPage> {
 
     private String accountType;
+    private String accountNumber;
 
-    public OpenNewAccountScenario(String accountType) {
+    public OpenNewAccountScenario(String accountType, String accountNumber) {
         this.accountType = accountType;
+        this.accountNumber = accountNumber;
     }
 
 
@@ -16,7 +18,7 @@ public class OpenNewAccountScenario implements Scenario<MenuPage, AccountOpenedP
     public AccountOpenedPage run(MenuPage entry) {
         return entry.clickOpenNewAccountLink()
                 .selectTypeOfAccount(accountType)
-                .selectAccountToTransfer()
+                .selectAccountToTransfer(accountNumber)
                 .clickOpenNewAccountButton();
     }
 }

@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.ITestContext;
 
 public class MenuPage extends MainPage {
 
@@ -31,38 +32,38 @@ public class MenuPage extends MainPage {
     @FindBy(xpath = "//a[contains(@href, '/parabank/logout.htm') and text()='Log Out']")
     private WebElement logOutLink;
 
-    public MenuPage(WebDriver driver) {
-        super(driver);
+    public MenuPage(WebDriver driver, ITestContext context) {
+        super(driver, context);
         PageFactory.initElements(driver, this);
     }
 
     public OpenNewAccountPage clickOpenNewAccountLink() {
         openNewAccountLink.click();
         waitForJStoLoad();
-        return new OpenNewAccountPage(driver);
+        return new OpenNewAccountPage(driver, getContext());
     }
 
     public AccountPage clickAccountsOverviewLink() {
         accountsOverviewLink.click();
         waitForJStoLoad();
-        return new AccountPage(driver);
+        return new AccountPage(driver, getContext());
     }
 
     public TransferFundsPage clickTransferFundsLink() {
         transferFundsLink.click();
         waitForJStoLoad();
-        return new TransferFundsPage(driver);
+        return new TransferFundsPage(driver, getContext());
     }
 
     public FindTransactionsPage clickFindTransactionsLink() {
         findTransactionsLink.click();
         waitForJStoLoad();
-        return new FindTransactionsPage(driver);
+        return new FindTransactionsPage(driver, getContext());
     }
 
     public IndexPage clickLogOutLink() {
         logOutLink.click();
         waitForJStoLoad();
-        return new IndexPage(driver);
+        return new IndexPage(driver, getContext());
     }
 }

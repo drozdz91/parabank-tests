@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.ITestContext;
 
 public class OpenNewAccountPage extends LoggedInPage {
 
@@ -20,10 +21,10 @@ public class OpenNewAccountPage extends LoggedInPage {
     @FindBy(xpath = "//input[@class='button' and @value='Open New Account']")
     private WebElement openNewAccountButton;
 
-    public OpenNewAccountPage(WebDriver driver) {
-        super(driver);
+    public OpenNewAccountPage(WebDriver driver, ITestContext context) {
+        super(driver, context);
         PageFactory.initElements(driver, this);
-        openAccountAssertion = new OpenAccountAssertion(driver);
+        openAccountAssertion = new OpenAccountAssertion(driver,  getContext());
     }
 
     public OpenNewAccountPage selectTypeOfAccount(String type) {
@@ -32,15 +33,16 @@ public class OpenNewAccountPage extends LoggedInPage {
         return this;
     }
 
-    public OpenNewAccountPage selectAccountToTransfer() {
+    public OpenNewAccountPage selectAccountToTransfer(String accountTransferTo) {
         Select accountToTransfer = new Select(selectAccountToTransferFunds);
-        accountToTransfer.selectByIndex(0);
+        String value = getContextAttribute(accountTransferTo);
+        accountToTransfer.selectByValue(value);
         return this;
     }
 
     public AccountOpenedPage clickOpenNewAccountButton() {
         openNewAccountButton.click();
         waitForJStoLoad();
-        return new AccountOpenedPage(driver);
+        return new AccountOpenedPage(driver, getContext());
     }
 }
