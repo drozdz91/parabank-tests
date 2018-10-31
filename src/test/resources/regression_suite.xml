@@ -7,7 +7,7 @@
         <classes>
             <!--<class name="AccountTest"/>-->
             <class name="RegistrationTest"/>
-            <class name="FindTransactionsTest"/>
+            <!--<class name="FindTransactionsTest"/>-->
             <!--<class name="ForgotLoginInfoTest"/>-->
         </classes>
     </test>
