@@ -8,7 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.testng.ITestContext;
 
 public class IndexPage extends MainPage {
-    //test comment
+
     private String url;
     public LoginAssertion loginAssertion;
 
