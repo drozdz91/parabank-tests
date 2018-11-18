@@ -17,7 +17,7 @@ public class LoginSteps extends MainSteps {
         indexPage.openIndexPage();
     }
 
-    @When("^Username as \"([^\"]*)\" with password \"([^\"]*)\"$")
+    @When("^User fills username as \"([^\"]*)\" with password \"([^\"]*)\"$")
     public void usernameAsWithPassword(String userName, String password) throws Throwable {
         indexPage.fillUsername(userName)
                 .fillPassword(password)
